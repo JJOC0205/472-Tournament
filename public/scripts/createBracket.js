@@ -15,7 +15,7 @@ Submit
 </div>
 `
   );
-  $(".numButton").click((e)=>{
+  $(".numButton").click(()=>{
     let num = $("#num").val();
     if(!!num){
       firebase.database().ref('brackets').set({
@@ -23,7 +23,7 @@ Submit
       });
     }
   });
-  $(".coolbutton").click((e)=>{
+  $(".coolbutton").click(()=>{
     let yourname = $("#text").val();
     if(!!yourname){
       firebase.database().ref('users/').child(userId).set({
