@@ -1,7 +1,7 @@
 let userId = false;
 let yourname = "";
 let renderMe = ()=>{
-  $("#main").html(
+  $("#creator").html(
 `
 <div id="text-wrapper">
 <input type="text" id="num" placeholder="Enter number of players"/>
