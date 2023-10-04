@@ -33,7 +33,9 @@ Submit
           num: num
         }
       );
-      
+    }
+    else{
+      alert("Please enter a valid number of players and bracket name");
     }
   });
   $(".coolbutton").click(()=>{
