@@ -6,6 +6,8 @@
     <title>Welcome to Firebase Hosting</title>
 
     <!-- update the version number as needed -->
+    <link rel="css" href="css/index.css">
+    <script src="scripts/addUser.js"></script>
     <script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
@@ -14,8 +16,26 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div id="creator">
+    <!-- <div id="bracket"></div>
+    <div id="creator"></div> -->
+    <div id="newUser">
+      <form id="newUserForm" onsubmit="return false">
+        <input type="text" id="newUserText" placeholder="Enter your username"/>
+        <button class="addUser" id="newUserSubmit" onclick="addUser()">
+        Submit
+        </button>
+      </form>
     </div>
+    <div id="text-wrapper">
+      <input type="text" id="num" placeholder="Enter number of players"/>
+      <button class="numButton" id="submit">
+      Submit
+      </button>
+      <input type="text" id="text" placeholder="Enter your name"/>
+      <button class="coolbutton" id="submit" hidden>
+      Submit
+      </button>
+      </div>
     <script src="scripts/createBracket.js"></script>  
   </body>
 </html>
