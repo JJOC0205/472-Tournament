@@ -7,6 +7,8 @@
 
     <!-- update the version number as needed -->
     <link rel="css" href="css/index.css">
+    <script type="module" src="scripts/addUser.js"></script>
+    <script type="module" src="scripts/createBracket.js"></script>
     <script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
@@ -22,30 +24,15 @@
         <button class="addUser" id="newUserSubmit">
         Submit
         </button>
-        <script>    
-    document.getElementById('newUserSubmit').addEventListener('submit', function(){
-      let newUser = document.getElementById('newUserInput').value;
-    console.log("clicked")
-    if (!!newUser) {
-        firebase.database().ref('users/').child(userId).set({
-            name: newUser
-        });
-    }
-    e.preventDefault();
-    });
-    </script>
-    </div>
-    <div id="text-wrapper">
+      </div>
+    <div id="text-wrapper" hidden>
+      <input type="text" id="bracketName" placeholder="Enter the bracket name"/>
       <input type="text" id="num" placeholder="Enter number of players"/>
       <button class="numButton" id="submit">
       Submit
       </button>
-      <script></script>
-      <input type="text" id="text" placeholder="Enter your name"/>
-      <button class="coolbutton" id="submit" hidden>
-      Submit
-      </button>
+      
       </div>
-      <script src="scripts/createBracket.js"></script>
+    <div id="players" hidden></div>
   </body>
 </html>

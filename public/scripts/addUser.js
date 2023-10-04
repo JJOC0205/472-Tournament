@@ -1,12 +1,28 @@
-function addUser(){
-    let newUser = document.getElementById('newUserInput').value;
-    console.log("clicked")
-    if (!!newUser) {
-        firebase.database().ref('users/').child(userId).set({
-            name: newUser
-        });
+let userId = false;
+let userName = "";
+let addUser = ()=>{
+  $("#newUserSubmit").click(()=>{
+    let userName = $("#newUserText").val();
+    if(!!userName){
+      firebase.database().ref('users/').child(userId).set({
+        name :userName
+      });
+      document.getElementById("text-wrapper").removeAttribute("hidden");
     }
-    e.preventDefault();
-
+  }
+  );
 }
-    document.getElementById('newUserSubmit').addEventListener('submit', addUser);
+document.addEventListener('DOMContentLoaded', function() {
+  firebase.auth().onAuthStateChanged(user => {
+    if(!user){
+      console.log("not logged in");
+      return;
+    }
+    else{
+      console.log(user);
+      userId = user.uid;
+      addUser();
+    }
+  });
+  firebase.auth().signInAnonymously();
+});

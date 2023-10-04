@@ -1,11 +1,6 @@
-let removeHidden = ()=>{
-  let hidden = document.querySelectorAll(".hidden");
-  hidden.forEach((item)=>{
-    item.removeAttribute("hidden");
-  });
-}
 let userId = false;
 let yourname = "";
+let bracketName = "";
 let renderMe = ()=>{
 /*     $("bracket").html(
 `
@@ -31,11 +26,14 @@ Submit
   ); */
   $(".numButton").click(()=>{
     let num = $("#num").val();
-    if(!!num){
-      firebase.database().ref('brackets').set({
-        num: num
-      });
-      removeHidden();
+    bracketName = $("#bracketName").val();
+    if(!!num && num > 0 && bracketName != ""){
+      firebase.database().ref('brackets').child(bracketName).set(
+        {
+          num: num
+        }
+      );
+      
     }
   });
   $(".coolbutton").click(()=>{
