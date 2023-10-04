@@ -1,21 +1,12 @@
-/* let button = document.getElementById('submit');
-button.addEventListener('click', (e) => {
+function addUser(){
+    let newUser = document.getElementById('newUserInput').value;
     console.log("clicked")
-    let yourname = newUserInput.value;
-    if (!!yourname) {
+    if (!!newUser) {
         firebase.database().ref('users/').child(userId).set({
-            name: yourname
+            name: newUser
         });
     }
     e.preventDefault();
-}); */
-let addUser = () => {
-    let newUser = document.getElementById('newUserInput');
-    console.log("clicked")
-    if (!!newUser.value) {
-        firebase.database().ref('users/').child(userId).set({
-            name: newUser.value
-        });
-    }
-    e.preventDefault();
+
 }
+    document.getElementById('newUserSubmit').addEventListener('submit', addUser);
