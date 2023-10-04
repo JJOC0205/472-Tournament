@@ -32,5 +32,6 @@ export function addPlayer(bracketName, numPlayers){
         firebase.database().ref('brackets/').child(bracketName).update({
             playerNames
         });
+        document.getElementById("joinBracket").setAttribute("hidden", true);
     });
 }

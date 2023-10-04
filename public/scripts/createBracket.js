@@ -29,12 +29,13 @@ Submit
     let num = $("#num").val();
     bracketName = $("#bracketName").val();
     if(!!num && num > 0 && bracketName != ""){
-      firebase.database().ref('brackets').child(bracketName).set(
+      firebase.database().ref('brackets').child(bracketName).update(
         {
           num: num
         }
       );
         addPlayer(bracketName,num);
+        document.getElementById("submit").setAttribute("hidden", true);
     }
     else{
       alert("Please enter a valid number of players and bracket name");
