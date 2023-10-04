@@ -1,3 +1,4 @@
+import { addPlayer } from "./addPlayers.js";
 let userId = false;
 let yourname = "";
 let bracketName = "";
@@ -33,6 +34,7 @@ Submit
           num: num
         }
       );
+        addPlayer(bracketName,num);
     }
     else{
       alert("Please enter a valid number of players and bracket name");
