@@ -9,31 +9,34 @@
     <link rel="css" href="css/index.css">
     <script type="module" src="scripts/addUser.js"></script>
     <script type="module" src="scripts/createBracket.js"></script>
+    <script type="module" src="scripts/routing.js"></script>
     <script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.4.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="scripts/routing.js" type="text/javascript"></script>
   </head>
   <body>
-    <!-- <div id="bracket"></div>
-    <div id="creator"></div> -->
-    <button id="printUsers">Print Users</button>
-    <div id="newUser">
+    <div data-page="content" id="display">
+    <div data-page="template" id="page1">
+      <div id="newUser">
         <input type="text" id="newUserText" placeholder="Enter your username"/>
         <button class="addUser" id="newUserSubmit">
         Submit
         </button>
       </div>
-    <div id="text-wrapper" hidden>
+    </div>
+    <div data-page="template" id="page2">
+    <div id="text-wrapper">
       <input type="text" id="bracketName" placeholder="Enter the bracket name"/>
       <input type="text" id="num" placeholder="Enter number of players"/>
       <button class="numButton" id="submit">
       Submit
       </button>
-      
       </div>
-    <div id="players"></div>
+    </div>
+    <div class="players"></div>
   </body>
 </html>
