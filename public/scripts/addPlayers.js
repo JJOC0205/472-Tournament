@@ -1,4 +1,4 @@
-export function addPlayer(bracketName, numPlayers){
+ function addPlayer(bracketName, numPlayers){
     console.log(numPlayers);
     let players = document.getElementById("players");
     for(var i = 0; i < numPlayers; i++){
@@ -20,18 +20,12 @@ export function addPlayer(bracketName, numPlayers){
         for(var i = 0; i < numPlayers; i++){
             let yourname = document.getElementById("player"+i).value;
             console.log(yourname);
-            /* var playerNum = "player" + i;
-            if(!!yourname){
-                firebase.database().ref('brackets/').child(bracketName).set({
-                     : yourname
-                });
-            } */
             playerNames.push(yourname);
         }
         console.log(playerNames);
-        firebase.database().ref('brackets/').child(bracketName).update({
-            playerNames
-        });
-        document.getElementById("joinBracket").setAttribute("hidden", true);
-    });
-}
+         firebase.database().ref('brackets/').child(bracketName).update({
+             playerNames
+         });
+         document.getElementById("joinBracket").setAttribute("hidden", true);
+     });
+ }

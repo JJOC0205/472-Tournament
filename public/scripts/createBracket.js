@@ -1,44 +1,19 @@
-import { addPlayer } from "./addPlayers.js";
-let userId = false;
-let yourname = "";
-let bracketName = "";
-let renderMe = ()=>{
-/*     $("bracket").html(
-`
-<div id="bracket-wrapper">
-    <input type="text" id="bracketID" placeholder="Enter your bracket name/ID"/>
-    <button class="bracketButton" id="submit">
-</div>
-`
-    ); */
-/*   $("#creator").html(
-`
-<div id="text-wrapper">
-<input type="text" id="num" placeholder="Enter number of players"/>
-<button class="numButton" id="submit">
-Submit
-</button>
-<input type="text" id="text" placeholder="Enter your name"/>
-<button class="coolbutton" id="submit">
-Submit
-</button>
-</div>
-`
-  ); */
+
+ function renderMe(){
   $(".numButton").click(()=>{
-    let num = $("#num").val();
-    bracketName = $("#bracketName").val();
-    if(!!num && num > 0 && bracketName != ""){
-      firebase.database().ref('brackets').child(bracketName).update(
-        {
-          num: num
-        }
-      );
-        addPlayer(bracketName,num);
-        document.getElementById("submit").setAttribute("hidden", true);
-    }
-    else{
-      alert("Please enter a valid number of players and bracket name");
+     let num = $("#num").val();
+     bracketName = $("#bracketName").val();
+     if(!!num && num > 0 && bracketName != ""){
+       firebase.database().ref('brackets').child(bracketName).update(
+         {
+           num: num
+         }
+       );
+         addPlayer(bracketName,num);
+         document.getElementById("submit").setAttribute("hidden", true);
+     }
+     else{
+       alert("Please enter a valid number of players and bracket name");
     }
   });
   $(".coolbutton").click(()=>{
@@ -50,17 +25,3 @@ Submit
     }
   });
 }
-document.addEventListener('DOMContentLoaded', function() {
-  firebase.auth().onAuthStateChanged(user => {
-    if(!user){
-      console.log("not logged in");
-      return;
-    }
-    else{
-      console.log(user);
-      userId = user.uid;
-      renderMe();
-    }
-  });
-  firebase.auth().signInAnonymously();
-});

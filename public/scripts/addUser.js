@@ -1,6 +1,4 @@
-let userId = false;
-let userName = "";
-let addUser = ()=>{
+function addUser(){
   $("#newUserSubmit").click(()=>{
     let userName = $("#newUserText").val();
     if(!!userName){
@@ -12,17 +10,3 @@ let addUser = ()=>{
   }
   );
 }
-document.addEventListener('DOMContentLoaded', function() {
-  firebase.auth().onAuthStateChanged(user => {
-    if(!user){
-      console.log("not logged in");
-      return;
-    }
-    else{
-      console.log(user);
-      userId = user.uid;
-      addUser();
-    }
-  });
-  firebase.auth().signInAnonymously();
-});
