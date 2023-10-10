@@ -11,7 +11,6 @@
     <script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.4.0/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <script defer src="scripts/addUser.js"></script>
     <script defer src="scripts/addPlayers.js"></script>
     <script defer src="scripts/createBracket.js"></script>
     <script defer src="scripts/firebaseAuth.js"></script>
@@ -22,19 +21,16 @@
     <div id="clickme"></div>
      <!-- <div id="bracket"></div>
      <div id="creator"></div> -->
-     <div id="newUser">
-         <input type="text" id="newUserText" placeholder="Enter your username"/>
-         <button class="addUser" id="newUserSubmit">
+     <div id = content">
+      <div id="text-wrapper">
+        <input type="text" id="bracketName" placeholder="Enter the bracket name"/>
+        <input type="text" id="num" placeholder="Enter number of players"/>
+        <button class="numButton" id="submit">
         Submit
-        </button>
+        </button> 
       </div>
-    <div id="text-wrapper">
-      <input type="text" id="bracketName" placeholder="Enter the bracket name"/>
-      <input type="text" id="num" placeholder="Enter number of players"/>
-      <button class="numButton" id="submit">
-      Submit
-      </button> 
-      </div>
-    <div id="players"></div>
+      <div id="players"></div>
+     <div id="allBrackets"></div>
+    </div>
   </body>
 </html>

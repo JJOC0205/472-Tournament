@@ -11,7 +11,7 @@ let renderLogin = ()=>{
 
 let startApp = (user)=>{
    $("#user").html(`<h1>Welcome ${user.displayName}!!</h1><button id="logout">Log out here</button>`);
-   renderMe();
+
    $("#logout").click(()=>{
      firebase.auth().signOut();
    })
@@ -22,6 +22,10 @@ let startApp = (user)=>{
   firebase.auth().onAuthStateChanged(user => {
     if (!!user){
       startApp(user);
+      firebase.database().ref('users/').child(user.uid).set({
+        name :user.displayName
+      });
+      renderMe(user);
     } else {
       renderLogin();
     }
