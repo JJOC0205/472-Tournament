@@ -1,36 +1,100 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>fuck this</title>
-    <!-- update the version number as needed -->
-    <link rel="css" href="css/index.css">
-    <script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.4.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    <script defer src="scripts/addPlayers.js"></script>
-    <script defer src="scripts/createBracket.js"></script>
-    <script defer src="scripts/firebaseAuth.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  </head>
-   <body>
-    <div id="user"></div>
-    <div id="clickme"></div>
-     <!-- <div id="bracket"></div>
-     <div id="creator"></div> -->
-     <div id = content">
-      <div id="text-wrapper">
-        <input type="text" id="bracketName" placeholder="Enter the bracket name"/>
-        <input type="text" id="num" placeholder="Enter number of players"/>
-        <button class="numButton" id="submit">
-        Submit
-        </button> 
-      </div>
-      <div id="players"></div>
-     <div id="allBrackets"></div>
-    </div>
-  </body>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>fuck this</title>
+	<!-- update the version number as needed -->
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/gracket.css">
+	<script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
+	<!-- include only the Firebase features as you need -->
+	<script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
+	<script defer src="/__/firebase/10.4.0/firebase-database-compat.js"></script>
+	<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+	<script defer src="scripts/addPlayers.js"></script>
+	<script defer src="scripts/createBracket.js"></script>
+	<script defer src="scripts/firebaseAuth.js"></script>
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+	<!-- dependencies -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+		crossorigin="anonymous"></script>
+
+	<!-- main lib -->
+	<script type="text/javascript" src="jquery.gracket.min.js"></script>
+
+</head>
+
+<body>
+	<div id="user"></div>
+	<div id="clickme"></div>
+	<div id=content">
+		<div id="text-wrapper">
+			<input type="text" id="bracketName" placeholder="Enter the bracket name" />
+			<input type="text" id="num" placeholder="Enter number of players" />
+			<button class="numButton" id="submit">
+				Submit
+			</button>
+		</div>
+		<div id="players"></div>
+		<div id="allBrackets"></div>
+	</div>
+	<div class="my_gracket"></div>
+
+	<script type="text/javascript">
+		(function (win, doc, $) {
+
+			console.warn("Make sure the min-width of the .gracket_h3 element is set to width of the largest name/player. Gracket needs to build its canvas based on the width of the largest element. We do this my giving it a min width. I'd like to change that!");
+
+			// Fake Data
+			win.TestData = [
+				[
+					[{ "name": "Erik Zettersten", "id": "erik-zettersten", "seed": 1 }, { "name": "Andrew Miller", "id": "andrew-miller", "seed": 2 }],
+					[{ "name": "James Coutry", "id": "james-coutry", "seed": 3 }, { "name": "Sam Merrill", "id": "sam-merrill", "seed": 4 }],
+					[{ "name": "Anothy Hopkins", "id": "anthony-hopkins", "seed": 5 }, { "name": "Everett Zettersten", "id": "everett-zettersten", "seed": 6 }],
+					[{ "name": "John Scott", "id": "john-scott", "seed": 7 }, { "name": "Teddy Koufus", "id": "teddy-koufus", "seed": 8 }],
+					[{ "name": "Arnold Palmer", "id": "arnold-palmer", "seed": 9 }, { "name": "Ryan Anderson", "id": "ryan-anderson", "seed": 10 }],
+					[{ "name": "Jesse James", "id": "jesse-james", "seed": 1 }, { "name": "Scott Anderson", "id": "scott-anderson", "seed": 12 }],
+					[{ "name": "Josh Groben", "id": "josh-groben", "seed": 13 }, { "name": "Sammy Zettersten", "id": "sammy-zettersten", "seed": 14 }],
+					[{ "name": "Jake Coutry", "id": "jake-coutry", "seed": 15 }, { "name": "Spencer Zettersten", "id": "spencer-zettersten", "seed": 16 }]
+				],
+				[
+					[{ "name": "Erik Zettersten", "id": "erik-zettersten", "seed": 1 }, { "name": "James Coutry", "id": "james-coutry", "seed": 3 }],
+					[{ "name": "Anothy Hopkins", "id": "anthony-hopkins", "seed": 5 }, { "name": "Teddy Koufus", "id": "teddy-koufus", "seed": 8 }],
+					[{ "name": "Ryan Anderson", "id": "ryan-anderson", "seed": 10 }, { "name": "Scott Anderson", "id": "scott-anderson", "seed": 12 }],
+					[{ "name": "Sammy Zettersten", "id": "sammy-zettersten", "seed": 14 }, { "name": "Jake Coutry", "id": "jake-coutry", "seed": 15 }]
+				],
+				[
+					[{ "name": "Erik Zettersten", "id": "erik-zettersten", "seed": 1 }, { "name": "Anothy Hopkins", "id": "anthony-hopkins", "seed": 5 }],
+					[{ "name": "Ryan Anderson", "id": "ryan-anderson", "seed": 10 }, { "name": "Sammy Zettersten", "id": "sammy-zettersten", "seed": 14 }]
+				],
+				[
+					[{ "name": "Erik Zettersten", "id": "erik-zettersten", "seed": 1 }, { "name": "Ryan Anderson", "id": "ryan-anderson", "seed": 10 }]
+				]
+			];
+
+			// initializer
+			$(".my_gracket").gracket({ src: win.TestData });
+
+		})(window, document, jQuery);
+	</script>
+	<script type="text/javascript">
+
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36251023-1']);
+		_gaq.push(['_setDomainName', 'jqueryscript.net']);
+		_gaq.push(['_trackPageview']);
+
+		(function () {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+	</script>
+</body>
+
 </html>

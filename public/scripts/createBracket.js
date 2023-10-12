@@ -2,8 +2,6 @@
  function renderMe(user){
   console.log("render me");
   userId = user.uid;
-  db = firebase.database().collection("brackets");
-  console.log(db);
   $(".numButton").click(()=>{
      let num = $("#num").val();
      bracketName = $("#bracketName").val();
@@ -17,7 +15,7 @@
          document.getElementById("submit").setAttribute("hidden", true);
      }
      else{
-       alert("Please enter a valid number of players and bracket name");
+       console.log(firebase.database().ref('brackets').child(bracketName).get());
     }
   });
   $(".coolbutton").click(()=>{
