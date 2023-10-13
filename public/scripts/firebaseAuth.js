@@ -25,7 +25,7 @@ let startApp = (user)=>{
       firebase.database().ref('users/').child(user.uid).set({
         name :user.displayName
       });
-      renderMe(user);
+      joinBrackets(user);
     } else {
       renderLogin();
     }

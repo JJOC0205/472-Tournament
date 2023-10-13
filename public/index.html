@@ -16,6 +16,7 @@
 	<script defer src="scripts/addPlayers.js"></script>
 	<script defer src="scripts/createBracket.js"></script>
 	<script defer src="scripts/firebaseAuth.js"></script>
+	<script defer src="scripts/joinBrackets.js"></script>
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 	<!-- dependencies -->
@@ -32,13 +33,18 @@
 	<div id="user"></div>
 	<div id="clickme"></div>
 	<div id=content">
-		<div id="text-wrapper">
+		<!-- <div id="text-wrapper">
 			<input type="text" id="bracketName" placeholder="Enter the bracket name" />
 			<input type="text" id="num" placeholder="Enter number of players" />
 			<button class="numButton" id="submit">
 				Submit
 			</button>
-		</div>
+		</div> -->
+		<!-- <input type="text" id="bracketName" placeholder="Enter the bracket name" />
+		<button class="joinButton" id="submit">
+			Submit
+		</button> -->
+		<div id="join"></div>
 		<div id="players"></div>
 		<div id="allBrackets"></div>
 	</div>
@@ -50,9 +56,11 @@
 			console.warn("Make sure the min-width of the .gracket_h3 element is set to width of the largest name/player. Gracket needs to build its canvas based on the width of the largest element. We do this my giving it a min width. I'd like to change that!");
 
 			// Fake Data
+			var vals = getVals("test");
+			var keys = getKeys("test")
 			win.TestData = [
 				[
-					[{ "name": "Erik Zettersten", "id": "erik-zettersten", "seed": 1 }, { "name": "Andrew Miller", "id": "andrew-miller", "seed": 2 }],
+					[{ "name": vals[0], "id": keys[0], "seed": 1 }, { "name": "Andrew Miller", "id": "andrew-miller", "seed": 2 }],
 					[{ "name": "James Coutry", "id": "james-coutry", "seed": 3 }, { "name": "Sam Merrill", "id": "sam-merrill", "seed": 4 }],
 					[{ "name": "Anothy Hopkins", "id": "anthony-hopkins", "seed": 5 }, { "name": "Everett Zettersten", "id": "everett-zettersten", "seed": 6 }],
 					[{ "name": "John Scott", "id": "john-scott", "seed": 7 }, { "name": "Teddy Koufus", "id": "teddy-koufus", "seed": 8 }],
