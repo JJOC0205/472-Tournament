@@ -1,7 +1,7 @@
 /* document.querySelector("#createGame").addEventListener("click", function (event) {
     var name = document.getElementById("#bracketName").value;
 
-}); */
+});
 document.querySelector("#joinGame").addEventListener("click", function (event) {
     if (document.getElementById("playerName").value == "") {
         alert("Please enter a name");
@@ -15,3 +15,4 @@ document.querySelector("#joinGame").addEventListener("click", function (event) {
     });
     document.getElementById("content").appendChild(newPlayer);
 });
+*/
