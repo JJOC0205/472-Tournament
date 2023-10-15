@@ -7,14 +7,12 @@
 	<title>fuck this</title>
 	<!-- update the version number as needed -->
 	<link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/gracket.css">
 	<script defer src="/__/firebase/10.4.0/firebase-app-compat.js"></script>
 	<!-- include only the Firebase features as you need -->
 	<script defer src="/__/firebase/10.4.0/firebase-auth-compat.js"></script>
 	<script defer src="/__/firebase/10.4.0/firebase-database-compat.js"></script>
 	<script defer src="/__/firebase/init.js?useEmulator=true"></script>
 	<script defer src="scripts/firebaseAuth.js"></script>
-	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 	<!-- dependencies -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -22,12 +20,14 @@
 		crossorigin="anonymous"></script>
 
 	<!-- main lib -->
-	<script type="text/javascript" src="jquery.gracket.min.js"></script>
 
 </head>
-
 <body>
-
+	<div id="user"></div>
+	<div id="content">
+		<input type="text" id="gameName" placeholder="Game Name">
+		<button id="createGame">Create Game</button>
+	</div>
 </body>
 
 </html>
