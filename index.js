@@ -1,6 +1,5 @@
 let theUser = null;
 let db = firebase.database();
-bracketName = "test";
 let renderLogin = () => {
 	var google_provider = new firebase.auth.GoogleAuthProvider();
 	$("#user").html(`
@@ -23,16 +22,16 @@ function renderHome() {
 			alert("Please enter a name");
 			return;
 		}
-		let newBracket = db.ref("brackets/").push();
+		let newBracket = db.ref("bracket/").push();
 		newBracket.set({ "name": bracketName, "id": newBracket.key, "players": [{"user": theUser.displayName}] });
 	});
-	firebase.database().ref("brackets/").on("value", (snapshot) => {
+	firebase.database().ref("bracket/").on("value", (snapshot) => {
 		$("#brackets").html("");
 		let allBrackets = snapshot.val() || {};
 		Object.keys(allBrackets).map(bracketId => {
 			theBracket = allBrackets[bracketId];
 			$("#brackets").append(`
-		<a class= "bracket-wrap" href="/brackets/${bracketId}">
+		<a class= "bracket-wrap" href="/bracket/${bracketId}">
 		<h2>${theBracket.name}</h2>
 		</a>
 		`);
@@ -43,14 +42,11 @@ function renderHome() {
 
 function renderBracket(bracketId) {
 	$('#content').html('loading...');
-	db.ref('brackets/').child(bracketId).on('value',(snapshot) => {
+	db.ref('bracket/').child(bracketId).on('value').then((snapshot) => {
 		theBracket = snapshot.val();
-		console.log("HERE");
-		let name = theBracket.name;
-		console.log(name);
 		console.log(theBracket);
 		$('#content').html(`
-			<h1>${bracketName}</h1>
+			<h1>${theBracket.name}</h1>
 			<div id="bracket"></div>
 			<button id="addPlayer">Add Player</button>
 			<button id="startGame">Start Game</button>
@@ -63,7 +59,7 @@ function renderBracket(bracketId) {
 		});
 		if (!joined) {
 			$("#addPlayer").on("click", () => {
-				db.ref("brackets/").child(bracketId).child("players").push({ "name": theUser.displayName, "id": theUser.uid });
+				db.ref("bracket/").child(bracketId).child("players").push({ "name": theUser.displayName, "id": theUser.uid });
 			});
 		}
 		else {
@@ -83,7 +79,7 @@ let startApp = (parts) => {
 		renderHome();
 	}
 	else {
-		if (parts[1] == 'brackets' && parts[2].length > 1) {
+		if (parts[1] == 'bracket' && parts[2].length > 1) {
 			renderBracket(parts[1]);
 		}
 		else {
@@ -94,7 +90,7 @@ let startApp = (parts) => {
 
 function startGame(bracketId){
 	players = [];
-	db.ref("brackets/").child(bracketId).on("value", (snapshot) => {
+	db.ref("bracket/").child(bracketId).on("value", (snapshot) => {
 		theBracket = snapshot.val();
 		theBracket.players.map((player) => {
 			players.push(player);
