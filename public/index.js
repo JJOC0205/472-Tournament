@@ -1,7 +1,5 @@
 let theUser = null;
-function createBracket() {
-	let playerNum = document.getElementsByClassName("player").length;
-}
+let db = firebase.database();
 let renderLogin = () => {
 	var google_provider = new firebase.auth.GoogleAuthProvider();
 	$("#user").html(`
@@ -25,15 +23,15 @@ function renderHome() {
 			return;
 		}
 		let newBracket = db.ref("brackets/").push();
-		newBracket.set({ "name": bracketName, "id": newBracket.key, "players": [] });
+		newBracket.set({ "name": bracketName, "id": newBracket.key, "players": [{"user": theUser.displayName}] });
 	});
 	firebase.database().ref("brackets/").on("value", (snapshot) => {
 		$("#brackets").html("");
 		let allBrackets = snapshot.val() || {};
-		Object.keys(allBrackets).map((bracketId) => {
+		Object.keys(allBrackets).map(bracketId => {
 			theBracket = allBrackets[bracketId];
 			$("#brackets").append(`
-		<a class= "bracket-wrap" href="/bracket/${theBracket.id}">
+		<a class= "bracket-wrap" href="/bracket/${bracketId}">
 		<h2>${theBracket.name}</h2>
 		</a>
 		`);
@@ -44,7 +42,7 @@ function renderHome() {
 
 function renderBracket(bracketId) {
 	$('#content').html('loading...');
-	db.ref('brackets/').child(bracketId).once('value').then((snapshot) => {
+	db.ref('brackets/').child(bracketId).on('value').then((snapshot) => {
 		theBracket = snapshot.val();
 		console.log(theBracket);
 		$('#content').html(`
@@ -68,6 +66,7 @@ function renderBracket(bracketId) {
 			$("#addPlayer").remove();
 		}
 	});
+	
 }
 
 let startApp = (parts) => {
@@ -81,15 +80,28 @@ let startApp = (parts) => {
 	}
 	else {
 		if (parts[1] == 'brackets' && parts[2].length > 1) {
-			renderBracket(parts[2]);
+			renderBracket(parts[1]);
 		}
 		else {
 			renderHome();
 		}
 	}
 }
+
+function startGame(bracketId){
+	players = [];
+	db.ref("brackets/").child(bracketId).on("value", (snapshot) => {
+		theBracket = snapshot.val();
+		theBracket.players.map((player) => {
+			players.push(player);
+		});
+	});
+
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
 	let pathName = document.location.pathname;
+	console.log(pathName);
 	let splitPath = pathName.split("/");
 	firebase.auth().onAuthStateChanged(user => {
 		if (!!user) {
@@ -100,29 +112,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			renderLogin();
 		}
 	});
-});
-let db = firebase.database();
-document.querySelector("#createGame").addEventListener("click", function (event) {
-	let bracketName = document.getElementById("bracketName").value;
-	if (bracketName == "") {
-		alert("Please enter a name");
-		return;
-	}
-	let newBracket = db.ref("brackets/").push();
-	document.location.pathname = "/bracket/" + newBracket.key;
-	$("#content").html(`HELLS YEAH`);
-
-});
-let players = [];
-document.querySelector("#joinGame").addEventListener("click", function (event) {
-	console.log("clicked");
-	for (var i = 0; i < document.getElementById("numPlayers").value; i++) {
-		console.log("inloop")
-		var newInput = document.createElement("input");
-		newInput.className = "player";
-		newInput.type = "text";
-		newInput.placeholder = "enter player name";
-		document.getElementById("content").appendChild(newInput);
-	};
-	document.getElementById("numPlayers").value = 0;
 });
